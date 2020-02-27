@@ -22,31 +22,11 @@ comment: add a user to a group
   ↓Return [steps.ReturnStep-1485255183651]: 
 ↓CalcID [steps.SimpleStep-1485254322544]: 
   expression: var _id = org.apache.commons.codec.digest.DigestUtils.sha256Hex(user + ":" + group);
-↓SaveUser [steps.GetAuthenticatedUserStep-1485255240036]: 
-  output: false
-↓SetAdmin [steps.SetAuthenticatedUserStep-1485255254785]: 
-  userid: 
-    - xmlizable: 
-      - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
-      - SmartType: 
-        - ↑mode: PLAIN
-        - →→: c8o:admin
 ↓Call_Transaction [steps.TransactionStep-1485253923062]: 
   sourceTransaction: lib_FullSyncGrp.c8ofullsyncgrp.SetUserInGroup
   ↓user [variables.StepVariable-1485253923064]: 
   ↓group [variables.StepVariable-1485253923066]: 
   ↓_id [variables.StepVariable-1485254310215]: 
-↓RestoreUser [steps.SetAuthenticatedUserStep-1485255282540]: 
-  userid: 
-    - xmlizable: 
-      - ↑classname: com.twinsoft.convertigo.beans.steps.SmartType
-      - SmartType: 
-        - ↑mode: SOURCE
-        - com.twinsoft.convertigo.beans.common.XMLVector: 
-          - java.lang.String: 
-            - ↑value: 1485255240036
-          - java.lang.String: 
-            - ↑value: ./text()
 ↓IfExistThenElse [steps.IfExistThenElseStep-1485255504484]: 
   sourceDefinition: 
     - xmlizable: 

@@ -30,10 +30,14 @@ databaseName: c8ofullsyncgrp
     description: Document ID
 ↓SetUserInGroup [transactions.couchdb.PostDocumentTransaction]: 
   accessibility: Private
+  fullSyncAclPolicy: fromKeyC8oAcl
   p_json_base: '{"type":"c8oGrp"}'
   ↓user [variables.RequestableVariable-1485253901719]: 
   ↓group [variables.RequestableVariable-1485253909470]: 
   ↓_id [variables.RequestableVariable-1485254252736]: 
+  ↓_c8oAcl [variables.RequestableVariable-1582714441364]: 
+    description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
+    value: c8o:admin
 ↓design [couchdb.DesignDocument]: 
   docdata: 
     →: |
