@@ -24,6 +24,18 @@ databaseName: c8ofullsyncgrp
   viewname: design/get_users_by_group
   ↓_use_key [variables.RequestableVariable-1486387636061]: 
     description: (string) – Return only documents that match the specified key. Optional
+↓PostBulkDocuments [transactions.couchdb.PostBulkDocumentsTransaction]: 
+  ↓Test_Case [core.TestCase]: 
+    ↓_use_json_base [variables.TestCaseVariable-1594128698918]: 
+      description: (string) – JSON use as a base for the array of documents (js array), or for individual documents (js object). Optional
+    ↓_c8oAcl [variables.TestCaseVariable-1594128698920]: 
+      description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
+      value: c8o:admin
+  ↓_use_json_base [variables.RequestableVariable-1593787412870]: 
+    description: (string) – JSON use as a base for the array of documents (js array), or for individual documents (js object). Optional
+  ↓_c8oAcl [variables.RequestableVariable-1594128554396]: 
+    description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
+    value: c8o:admin
 ↓RemoveUserFromGroup [transactions.couchdb.DeleteDocumentTransaction]: 
   accessibility: Private
   ↓_use_docid [variables.RequestableVariable-1486391952010]: 

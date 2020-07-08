@@ -1,0 +1,42 @@
+accessibility: Private
+comment: add a user to a group
+↓Input_variables [steps.InputVariablesStep-1594129985760]: 
+↓jSource [steps.SourceStep-1594130023727]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1594129985760
+        - java.lang.String: 
+          - ↑value: ./bulkOBj/groups
+↓CalcID [steps.SimpleStep-1594128461727]: 
+  expression: |
+    'var jDoc = JSON.parse(''''+com.twinsoft.convertigo.engine.util.XMLUtils.XmlToJson(myNodeList.item(0), true, true));
+    var bulk = jDoc.groups.complex;
+    
+    for(var i in bulk){
+    	bulk[i]["_id"] = ""+ org.apache.commons.codec.digest.DigestUtils.sha256Hex(bulk[i]["user"] + ":" + bulk[i]["group"]);  
+    	bulk[i]["type"] = "c8oGrp";
+    }
+    
+    
+    '
+↓jElement [steps.ElementStep-1594136696357]: 
+  expression: JSON.stringify(bulk)
+↓Call_Transaction1 [steps.TransactionStep-1594136601582]: 
+  sourceTransaction: lib_FullSyncGrp.c8ofullsyncgrp.PostBulkDocuments
+  ↓_use_json_base [variables.StepVariable-1594136614360]: 
+    description: (string) – JSON use as a base for the array of documents (js array), or for individual documents (js object). Optional
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1594136696357
+          - java.lang.String: 
+            - ↑value: ./text()
+  ↓_c8oAcl [variables.StepVariable-1594136614362]: 
+    description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
+    value: c8o:admin
+↓bulkOBj [variables.RequestableMultiValuedVariable-1594128493594]: 
