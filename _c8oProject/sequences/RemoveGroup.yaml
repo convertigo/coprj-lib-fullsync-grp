@@ -1,0 +1,104 @@
+accessibility: Private
+↓Input_variables [steps.InputVariablesStep-1672247955826]: 
+↓Call_Sequence_1 [steps.SequenceStep-1672247363978]: 
+  sourceSequence: lib_FullSyncGrp.UsersOf
+  ↓group [variables.StepVariable-1672247387831]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1672247955826
+          - java.lang.String: 
+            - ↑value: ./group/text()
+↓Iterator [steps.IteratorStep-1672247399637]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1672247363978
+        - java.lang.String: 
+          - ↑value: ./document/user
+  ↓jSimpleSource [steps.SimpleSourceStep-1672247420653]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1672247399637
+          - java.lang.String: 
+            - ↑value: ./text()
+    variableName: user
+  ↓CalcID [steps.SimpleStep-1672247281586]: 
+    expression: var _use_docid = org.apache.commons.codec.digest.DigestUtils.sha256Hex(user + ":" + group);
+  ↓Call_Transaction [steps.TransactionStep-1672247264786]: 
+    sourceTransaction: lib_FullSyncGrp.c8ofullsyncgrp.RemoveGroup
+    ↓_use_docid [variables.StepVariable-1672247286244]: 
+      description: Document ID
+  ↓IfExistThenElse [steps.IfExistThenElseStep-1672247559950]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1672247264786
+          - java.lang.String: 
+            - ↑value: ./document/couchdb_output/ok
+    ↓jThen [steps.ThenStep-1672247559953]: 
+      ↓Element [steps.XMLElementStep-1672247559959]: 
+        nodeName: removed
+        nodeText: true
+        output: false
+      ↓Element1 [steps.XMLElementStep-1672247704212]: 
+        nodeName: success
+        nodeText: true
+        output: false
+    ↓jElse [steps.ElseStep-1672247559962]: 
+      ↓Element1 [steps.XMLElementStep-1672247712612]: 
+        nodeName: success
+        nodeText: false
+        output: false
+↓jSimpleSource [steps.SimpleSourceStep-1672248147763]: 
+  isEnabled: false
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1672247559959
+        - java.lang.String: 
+          - ↑value: ./text()
+  variableName: success
+↓jIfThenElse [steps.IfThenElseStep-1672248169991]: 
+  condition: success == "true"
+  isEnabled: false
+  ↓jThen [steps.ThenStep-1672248169993]: 
+    ↓Element1 [steps.XMLElementStep-1672248188228]: 
+      nodeName: success
+      nodeText: true
+  ↓jElse [steps.ElseStep-1672248169995]: 
+    ↓Element1 [steps.XMLElementStep-1672248190228]: 
+      nodeName: success
+      nodeText: false
+↓IfExistThenElse [steps.IfExistThenElseStep-1672248304507]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1672247559959
+        - java.lang.String: 
+          - ↑value: .
+  ↓jThen [steps.ThenStep-1672248304856]: 
+    ↓Element1 [steps.XMLElementStep-1672248333508]: 
+      nodeName: success
+      nodeText: true
+  ↓jElse [steps.ElseStep-1672248304858]: 
+    ↓Element1 [steps.XMLElementStep-1672248336788]: 
+      nodeName: success
+      nodeText: false
+↓group [variables.RequestableVariable-1672246912669]: 
+↓Test_Case [core.TestCase]: 
+  ↓group [variables.TestCaseVariable-1672247301818]: 
+    value: aa

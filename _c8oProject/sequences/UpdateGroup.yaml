@@ -1,0 +1,115 @@
+accessibility: Private
+↓Input_variables [steps.InputVariablesStep-1672311803230]: 
+↓Call_Sequence [steps.SequenceStep-1672311811692]: 
+  sourceSequence: lib_FullSyncGrp.UsersOf
+  ↓group [variables.StepVariable-1672311825158]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1672311803230
+          - java.lang.String: 
+            - ↑value: ./old_group_name/text()
+↓JsonSource [steps.JsonSourceStep-1672311935693]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1672311811692
+        - java.lang.String: 
+          - ↑value: ./document/user
+  variableName: usersOfGroup
+↓checkIfOneOrMultipleUsersInGroup [steps.SimpleStep-1672312948061]: 
+  expression: |
+    'var users = [];
+    if (typeof usersOfGroup === ''object'' && !Array.isArray(usersOfGroup) && usersOfGroup !== null) {
+    	users.push(usersOfGroup)
+    } else {
+    	users = usersOfGroup
+    }
+    
+    log.warn("users")
+    log.warn(users)'
+↓Call_Sequence_1 [steps.SequenceStep-1672311974676]: 
+  sourceSequence: lib_FullSyncGrp.RemoveGroup
+  ↓group [variables.StepVariable-1672311985680]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1672311803230
+          - java.lang.String: 
+            - ↑value: ./old_group_name/text()
+↓Complex1 [steps.XMLComplexStep-1672312061523]: 
+  nodeName: groups
+  ↓Attribute [steps.XMLAttributeStep-1672312061526]: 
+    nodeName: type
+    nodeText: array
+  ↓jIterator [steps.SimpleIteratorStep-1672312934806]: 
+    expression: users
+    ↓Complex [steps.XMLComplexStep-1672313157855]: 
+      ↓Attribute [steps.XMLAttributeStep-1672313157858]: 
+        nodeName: type
+        nodeText: object
+      ↓jElement [steps.ElementStep-1672313172326]: 
+        expression: users[index]['user']
+        nodeName: user
+      ↓Element [steps.XMLElementStep-1672313577002]: 
+        nodeName: group
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1672311803230
+              - java.lang.String: 
+                - ↑value: ./new_group_name/text()
+↓jIfThenElse [steps.IfThenElseStep-1672319582148]: 
+  condition: users.length == 1
+  ↓jThen [steps.ThenStep-1672319582150]: 
+    ↓jElement [steps.ElementStep-1672319712826]: 
+      expression: users[0].user
+      nodeName: user
+      output: false
+    ↓Call_Sequence [steps.SequenceStep-1672319597243]: 
+      sourceSequence: lib_FullSyncGrp.SetUserInGroup
+      ↓user [variables.StepVariable-1672319612334]: 
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1672319712826
+              - java.lang.String: 
+                - ↑value: ./text()
+      ↓group [variables.StepVariable-1672319612336]: 
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1672311803230
+              - java.lang.String: 
+                - ↑value: ./new_group_name/text()
+  ↓jElse [steps.ElseStep-1672319582152]: 
+    ↓Call_Sequence_2 [steps.SequenceStep-1672312011070]: 
+      sourceSequence: lib_FullSyncGrp.SetUserInGroupBulk
+      ↓bulkOBj [variables.StepMultiValuedVariable-1672312022800]: 
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1672312061523
+              - java.lang.String: 
+                - ↑value: .
+↓old_group_name [variables.RequestableVariable-1672311727372]: 
+↓new_group_name [variables.RequestableVariable-1672311755642]: 
+↓Test_Case [core.TestCase]: 
+  ↓old_group_name [variables.TestCaseVariable-1672311867557]: 
+    value: aa
+  ↓new_group_name [variables.TestCaseVariable-1672311867559]: 
+    value: aaa

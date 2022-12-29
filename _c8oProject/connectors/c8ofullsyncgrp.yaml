@@ -2,30 +2,28 @@
 anonymousReplication: allow
 databaseName: c8ofullsyncgrp
 ↓GetGroups [transactions.couchdb.GetViewTransaction]: 
-  accessibility: Private
   q_group_level: 1
   q_reduce: true
   viewname: design/get_users_by_group
 ↓GetGroupsByUser [transactions.couchdb.GetViewTransaction]: 
-  accessibility: Private
   q_reduce: false
   viewname: design/get_groups_by_user
   ↓_use_key [variables.RequestableVariable-1486393547007]: 
     description: (string) – Return only documents that match the specified key. Optional
 ↓GetServerInfo [transactions.couchdb.GetServerInfoTransaction]: 
   ↑default: true
+  accessibility: Public
 ↓GetUsers [transactions.couchdb.GetViewTransaction]: 
-  accessibility: Private
   q_group_level: 1
   q_reduce: true
   viewname: design/get_groups_by_user
 ↓GetUsersByGroup [transactions.couchdb.GetViewTransaction]: 
-  accessibility: Private
   q_reduce: false
   viewname: design/get_users_by_group
   ↓_use_key [variables.RequestableVariable-1486387636061]: 
     description: (string) – Return only documents that match the specified key. Optional
 ↓PostBulkDocuments [transactions.couchdb.PostBulkDocumentsTransaction]: 
+  accessibility: Public
   ↓Test_Case [core.TestCase]: 
     ↓_use_json_base [variables.TestCaseVariable-1594128698918]: 
       description: (string) – JSON use as a base for the array of documents (js array), or for individual documents (js object). Optional
@@ -37,12 +35,13 @@ databaseName: c8ofullsyncgrp
   ↓_c8oAcl [variables.RequestableVariable-1594128554396]: 
     description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
     value: c8o:admin
+↓RemoveGroup [transactions.couchdb.DeleteDocumentTransaction]: 
+  ↓_use_docid [variables.RequestableVariable-1672247091187]: 
+    description: Document ID
 ↓RemoveUserFromGroup [transactions.couchdb.DeleteDocumentTransaction]: 
-  accessibility: Private
   ↓_use_docid [variables.RequestableVariable-1486391952010]: 
     description: Document ID
 ↓SetUserInGroup [transactions.couchdb.PostDocumentTransaction]: 
-  accessibility: Private
   fullSyncAclPolicy: fromKeyC8oAcl
   p_json_base: '{"type":"c8oGrp"}'
   ↓user [variables.RequestableVariable-1485253901719]: 
