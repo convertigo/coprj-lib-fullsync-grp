@@ -35,6 +35,22 @@ databaseName: c8ofullsyncgrp
   ↓_c8oAcl [variables.RequestableVariable-1594128554396]: 
     description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
     value: c8o:admin
+↓PostFind [transactions.couchdb.PostFindTransaction]: 
+  ↓Test_Case [core.TestCase]: 
+    ↓_use_selector [variables.TestCaseVariable-1672751510992]: 
+      description: |
+        (json) – JSON object, evaluated from a JavaScript expression, describing criteria used to select documents. <br/>
+        More information provided in the section on <a target="_blank" href="https://docs.couchdb.org/en/latest/api/database/find.html#find-selectors">selector syntax</a>.<br/>Transaction variables are added to the scope for the JavaScript expression evaluation.
+      value: '{"$and":[{"group":{"$regex":"hdisparkvdc1Adm_pprod"}}]}'
+    ↓_use_limit [variables.TestCaseVariable-1672751510994]: 
+      description: (number) – Maximum number of results returned. Default is 25. Optional
+      value: 100
+  ↓_use_selector [variables.RequestableVariable-1672750890150]: 
+    description: |
+      (json) – JSON object, evaluated from a JavaScript expression, describing criteria used to select documents. <br/>
+      More information provided in the section on <a target="_blank" href="https://docs.couchdb.org/en/latest/api/database/find.html#find-selectors">selector syntax</a>.<br/>Transaction variables are added to the scope for the JavaScript expression evaluation.
+  ↓_use_limit [variables.RequestableVariable-1672750890152]: 
+    description: (number) – Maximum number of results returned. Default is 25. Optional
 ↓RemoveGroup [transactions.couchdb.DeleteDocumentTransaction]: 
   ↓_use_docid [variables.RequestableVariable-1672247091187]: 
     description: Document ID
